@@ -23,50 +23,64 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/getallusers",
+					"raw": "localhost:8080/users",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"getallusers"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "getuser",
+			"name": "getuserok",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/user?date=2015-01-01",
+					"raw": "localhost:8080/user/2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"user"
-					],
-					"query": [
-						{
-							"key": "date",
-							"value": "2015-01-01"
-						}
+						"user",
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "postuser",
+			"name": "getusernotfound",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postuserok",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"name\": \"ds+ ad\",\r\n        \"birthDate\": \"2001-11-01T00:00:00+00:00\",\r\n        \"residenceCountry\": \"FRance\",\r\n        \"telephoneNumber\": \"+32132\",\r\n        \"gender\":\"MLE\"\r\n    }",
+					"raw": "    {\r\n        \"name\": \"Name2\",\r\n        \"birthDate\": \"2001-11-01T00:00:00+00:00\",\r\n        \"residenceCountry\": \"France\",\r\n        \"telephoneNumber\": \"+32132\",\r\n        \"gender\":\"MALE\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,13 +101,94 @@
 			"response": []
 		},
 		{
-			"name": "searchuser",
+			"name": "postuserwithvalidationerror",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n}",
+					"raw": "    {\r\n        \"name\": \"Name2\",\r\n        \"birthDate\": \"2015-11-01T00:00:00+00:00\",\r\n        \"residenceCountry\": \"France\",\r\n        \"telephoneNumber\": \"+32132\",\r\n        \"gender\":\"MALE\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchuseremptyresult",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"noonewiththisname\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchuserfound",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"John Smith\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchuserbadrequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
