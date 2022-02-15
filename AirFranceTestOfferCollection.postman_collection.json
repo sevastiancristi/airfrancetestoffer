@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "be2071f4-1187-448b-b351-a7271b7dfeba",
+		"name": "AirFranceTestOfferCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getallusers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"defs\",\r\n        \"birthDate\": \"1970-01-01T00:00:03.213+00:00\",\r\n        \"residenceCountry\": \"dsadasd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/getallusers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getallusers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getuser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user?date=2015-01-01",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2015-01-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postuser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"ds+ ad\",\r\n        \"birthDate\": \"2001-11-01T00:00:00+00:00\",\r\n        \"residenceCountry\": \"FRance\",\r\n        \"telephoneNumber\": \"+32132\",\r\n        \"gender\":\"MLE\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchuser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
