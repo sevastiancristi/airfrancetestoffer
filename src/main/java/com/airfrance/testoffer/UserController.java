@@ -1,29 +1,21 @@
 package com.airfrance.testoffer;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.airfrance.testoffer.exceptions.BadSearchRequestControllerException;
@@ -32,15 +24,11 @@ import com.airfrance.testoffer.exceptions.UserNotFoundControllerException;
 @RestController
 public class UserController {
 
+	@Autowired
 	private UserRepository repository;
 
-	private UserModelAssembler assembler;
-
 	@Autowired
-	public void setRepositoryAndAssembler(UserRepository repository, UserModelAssembler assembler) {
-		this.repository = repository;
-		this.assembler = assembler;
-	}
+	private UserModelAssembler assembler;
 
 	@GetMapping("/users")
 	CollectionModel<EntityModel<User>> getAllUsers() {
@@ -66,7 +54,7 @@ public class UserController {
 				&& userSearchParameters.getBirthDate() == null && userSearchParameters.getResidenceCountry() == null
 				&& userSearchParameters.getTelephoneNumber() == null && userSearchParameters.getGender() == null)
 			throw new BadSearchRequestControllerException();
-		
+
 		List<EntityModel<User>> users = repository.findAll(Example.of(userSearchParameters)).stream()
 				.map(assembler::toModel).collect(Collectors.toList());
 		return CollectionModel.of(users, linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel());
